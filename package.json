@@ -14,8 +14,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "conflict-resolution-diff.helloWorld",
-        "title": "Hello World"
+        "command": "conflict-resolution-diff.showAutoMergeDiff",
+        "title": "Conflict Resolution Diff: Show AUTO_MERGE Diff"
       }
     ]
   },
