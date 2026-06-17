@@ -1,27 +1,46 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { execFile } from 'child_process';
+import { promisify } from 'util';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+const execFileAsync = promisify(execFile);
+
 export function activate(context: vscode.ExtensionContext) {
+  const disposable = vscode.commands.registerCommand(
+    'conflict-resolution-diff.showAutoMergeDiff',
+    async () => {
+      const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	// console.log('Congratulations, your extension "conflict-resolution-diff" is now active!');
+      if (!workspaceFolder) {
+        vscode.window.showErrorMessage('Open a workspace folder first.');
+        return;
+      }
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand(
-		"conflict-resolution-diff.showAutoMergeDiff",
-		() => {
-			vscode.window.showInformationMessage("Show AUTO_MERGE Diff");
-		},
-	);
+      try {
+        const { stdout } = await execFileAsync(
+          'git',
+          ['diff', 'AUTO_MERGE'],
+          {
+            cwd: workspaceFolder.uri.fsPath,
+            maxBuffer: 10 * 1024 * 1024,
+          }
+        );
 
-	context.subscriptions.push(disposable);
+        const document = await vscode.workspace.openTextDocument({
+          content: stdout || 'No diff found.',
+          language: 'diff',
+        });
+
+        await vscode.window.showTextDocument(document, {
+          preview: false,
+        });
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        vscode.window.showErrorMessage(`Failed to run git diff AUTO_MERGE: ${message}`);
+      }
+    }
+  );
+
+  context.subscriptions.push(disposable);
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}
