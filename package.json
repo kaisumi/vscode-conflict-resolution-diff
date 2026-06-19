@@ -16,6 +16,10 @@
       {
         "command": "conflict-resolution-diff.showAutoMergeDiff",
         "title": "Conflict Resolution Diff: Show AUTO_MERGE Diff"
+      },
+      {
+        "command": "conflict-resolution-diff.showResolvedConflictDiff",
+        "title": "Conflict Resolution Diff: Show Resolved Conflict Diff"
       }
     ]
   },
