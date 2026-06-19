@@ -21,6 +21,29 @@
         "command": "conflict-resolution-diff.showResolvedConflictDiff",
         "title": "Conflict Resolution Diff: Show Resolved Conflict Diff"
       }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "conflict-resolution-diff",
+          "title": "Conflict Diff",
+          "icon": "resources/conflict-diff.svg"
+        }
+      ]
+    },
+    "views": {
+      "conflict-resolution-diff": [
+        {
+          "id": "conflict-resolution-diff.actions",
+          "name": "Actions"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "conflict-resolution-diff.actions",
+        "contents": "Show conflict resolution diffs.\n\n[Show Uncommitted Resolution Diff](command:conflict-resolution-diff.showUncommittedResolutionDiff)\n[Show Resolved Conflict Diff](command:conflict-resolution-diff.showResolvedConflictDiff)"
+      }
     ]
   },
   "scripts": {

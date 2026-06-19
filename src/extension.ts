@@ -4,7 +4,24 @@ import { promisify } from 'util';
 
 const execFileAsync = promisify(execFile);
 
+class ActionsTreeDataProvider implements vscode.TreeDataProvider<never> {
+  getTreeItem(): vscode.TreeItem {
+    throw new Error('This view does not provide tree items.');
+  }
+
+  getChildren(): never[] {
+    return [];
+  }
+}
+
 export function activate(context: vscode.ExtensionContext) {
+  context.subscriptions.push(
+    vscode.window.registerTreeDataProvider(
+      'conflict-resolution-diff.actions',
+      new ActionsTreeDataProvider()
+    )
+  );
+
   const disposable = vscode.commands.registerCommand(
     'conflict-resolution-diff.showUncommittedResolutionDiff',
     async () => {
@@ -81,6 +98,7 @@ export function activate(context: vscode.ExtensionContext) {
       }
     }
   );
+  context.subscriptions.push(disposable2);
 }
 
 export function deactivate() {}
