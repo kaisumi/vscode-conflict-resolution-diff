@@ -1,14 +1,30 @@
 {
   "name": "conflict-resolution-diff",
-  "displayName": "conflict-resolution-diff",
-  "description": "View conflict resolution diffs using AUTO_MERGE and --remerge-diff.",
+  "displayName": "Conflict Resolution Diff",
+  "description": "View Git conflict resolution diffs from Visual Studio Code.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaisumi/vscode-conflict-resolution-diff.git"
+  },"homepage": "https://github.com/kaisumi/vscode-conflict-resolution-diff#readme",
+  "bugs": {
+    "url": "https://github.com/kaisumi/vscode-conflict-resolution-diff/issues"
+  },
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.120.0"
   },
   "categories": [
-    "Other"
+    "Other",
+    "Visualization"
   ],
+  "keywords": [
+    "git",
+    "merge",
+    "conflict",
+    "diff",
+    "remerge-diff"
+  ],
+  "preview": true,
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
@@ -55,13 +71,14 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.120.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "22.x",
-    "typescript-eslint": "^8.56.1",
+    "@types/vscode": "^1.120.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.9.2",
     "eslint": "^9.39.3",
     "typescript": "^5.9.3",
-    "@vscode/test-cli": "^0.0.12",
-    "@vscode/test-electron": "^2.5.2"
+    "typescript-eslint": "^8.56.1"
   }
 }
