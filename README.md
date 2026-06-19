@@ -1,71 +1,68 @@
-# conflict-resolution-diff README
+# Conflict Resolution Diff
 
-This is the README for your extension "conflict-resolution-diff". After writing up a brief description, we recommend including the following sections.
+Conflict Resolution Diff is a Visual Studio Code extension for viewing Git conflict resolution diffs.
+
+It helps you review what was changed while resolving merge conflicts, without manually typing Git commands every time.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- Show the diff of changes made while resolving an ongoing merge conflict.
+- Show the conflict resolution diff for a merge commit.
+- Open the result inside Visual Studio Code.
 
-For example if there is an image subfolder under your extension project workspace:
+This extension is intended for developers who want to review conflict resolution changes separately from the full branch diff.
 
-\!\[feature X\]\(images/feature-x.png\)
+## How it works
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+When you are resolving a merge conflict, the extension uses Git's `AUTO_MERGE` reference to show the changes made during conflict resolution.
+
+For an already-created merge commit, the extension uses Git's remerge diff output.
+
+## Usage
+
+Open the Conflict Resolution Diff view from the Activity Bar and run one of the available actions.
+
+### Show unresolved conflict resolution diff
+
+Use this while you are in the middle of resolving a merge conflict.
+
+The extension shows the diff between the current working tree and Git's `AUTO_MERGE` reference.
+
+### Show resolved conflict diff
+
+Use this for a merge commit after conflict resolution has already been committed.
+
+Enter the target merge commit when prompted, and the extension shows the remerge diff output for that commit.
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- Visual Studio Code
+- Git
+- A Git repository
+- For current conflict resolution diffs, the repository must be in a merge conflict resolution state.
+- For resolved conflict diffs, the target commit must be a merge commit.
 
-## Extension Settings
+## Limitations
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+This is an initial version.
 
-For example:
+The extension currently focuses on showing conflict resolution diffs. The following features are not included yet:
 
-This extension contributes the following settings:
+- Split editor diff view
+- Selecting merge commits from a list
+- Advanced filtering by file
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+## Why this extension?
 
-## Known Issues
+During code review, it is often useful to check only the changes that were introduced while resolving a conflict.
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+Git already provides commands for this, but they are not easy to discover or run repeatedly from inside the editor. This extension makes that workflow available from VS Code.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.0.1
 
-### 1.0.0
+Initial release.
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+- Show conflict resolution diff during an ongoing merge conflict.
+- Show remerge diff for a merge commit.
