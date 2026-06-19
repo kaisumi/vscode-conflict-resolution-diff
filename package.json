@@ -14,8 +14,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "conflict-resolution-diff.showAutoMergeDiff",
-        "title": "Conflict Resolution Diff: Show AUTO_MERGE Diff"
+        "command": "conflict-resolution-diff.showUncommittedResolutionDiff",
+        "title": "Conflict Resolution Diff: Show Uncommitted Resolution Diff"
       },
       {
         "command": "conflict-resolution-diff.showResolvedConflictDiff",

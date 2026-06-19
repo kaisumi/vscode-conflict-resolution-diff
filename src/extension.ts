@@ -6,7 +6,7 @@ const execFileAsync = promisify(execFile);
 
 export function activate(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerCommand(
-    'conflict-resolution-diff.showAutoMergeDiff',
+    'conflict-resolution-diff.showUncommittedResolutionDiff',
     async () => {
       const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
 
