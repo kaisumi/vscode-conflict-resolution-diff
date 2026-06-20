@@ -15,3 +15,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [1.0.1] - 2026-06-20
 
 - Add screenshot videos to README.md.
+
+## [1.0.2] - 2026-06-20
+
+- Fix screenshot videos on README.md.
