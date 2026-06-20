@@ -152,7 +152,7 @@ suite('Extension Test Suite', () => {
     assert.deepStrictEqual(calls.showInputBox, [
       {
         prompt: 'Paste a merge commit SHA',
-        placeHolder: 'merge commit hash, e.g. abc1234',
+        placeHolder: 'merge commit SHA, e.g. abc1234',
       },
     ]);
     assert.deepStrictEqual(calls.runGit, [
