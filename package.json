@@ -2,10 +2,14 @@
   "name": "conflict-resolution-diff",
   "displayName": "Conflict Resolution Diff",
   "description": "View Git conflict resolution diffs from Visual Studio Code.",
+  "publisher": "kaisumi",
+  "license": "MIT",
+  "icon": "resources/icon.png",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kaisumi/vscode-conflict-resolution-diff.git"
-  },"homepage": "https://github.com/kaisumi/vscode-conflict-resolution-diff#readme",
+  },
+  "homepage": "https://github.com/kaisumi/vscode-conflict-resolution-diff#readme",
   "bugs": {
     "url": "https://github.com/kaisumi/vscode-conflict-resolution-diff/issues"
   },
