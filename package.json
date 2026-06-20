@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/kaisumi/vscode-conflict-resolution-diff/issues"
   },
-  "version": "0.0.1",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.120.0"
   },
@@ -28,7 +28,7 @@
     "diff",
     "remerge-diff"
   ],
-  "preview": true,
+  "preview": false,
   "activationEvents": [],
   "main": "./out/extension.js",
   "capabilities": {

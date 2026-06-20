@@ -7,3 +7,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [0.0.1] - 2026-06-20
 
 - Initial release.
+
+## [1.0.0] - 2026-06-20
+
+- Promote the extension to a stable release.
