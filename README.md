@@ -1,5 +1,7 @@
 # Conflict Resolution Diff
 
+[![GitHub Release](https://img.shields.io/github/v/release/kaisumi/vscode-conflict-resolution-diff)](https://github.com/kaisumi/vscode-conflict-resolution-diff/releases)
+
 Conflict Resolution Diff is a Visual Studio Code extension for viewing Git conflict resolution diffs.
 
 It helps you review only the changes made while resolving merge conflicts, without manually typing Git commands.
