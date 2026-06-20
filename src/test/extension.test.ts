@@ -75,7 +75,7 @@ suite('Extension Test Suite', () => {
     await showUncommittedResolutionDiff(dependencies);
 
     assert.deepStrictEqual(calls.runGit, [
-      { args: ['diff', 'AUTO_MERGE'], cwd: '/workspace' },
+      { args: ['diff', '--no-ext-diff', '--no-textconv', '--no-color', 'AUTO_MERGE'], cwd: '/workspace' },
     ]);
     assert.deepStrictEqual(calls.openTextDocument, [
       { content: 'diff --git a/file.txt b/file.txt\n', language: 'diff' },
@@ -127,6 +127,19 @@ suite('Extension Test Suite', () => {
     assert.strictEqual(calls.runGit.length, 0);
   });
 
+  test('showResolvedConflictDiff rejects invalid commit input', async () => {
+    const { calls, dependencies } = createDependencies({
+      workspaceFolderPath: '/workspace',
+      inputValue: '--help',
+    });
+
+    await showResolvedConflictDiff(dependencies);
+
+    assert.deepStrictEqual(calls.showErrorMessage, ['Enter a valid commit SHA.']);
+    assert.strictEqual(calls.runGit.length, 0);
+    assert.strictEqual(calls.openTextDocument.length, 0);
+  });
+
   test('showResolvedConflictDiff runs git show remerge diff for the entered commit', async () => {
     const { calls, dependencies } = createDependencies({
       workspaceFolderPath: '/workspace',
@@ -144,7 +157,7 @@ suite('Extension Test Suite', () => {
     ]);
     assert.deepStrictEqual(calls.runGit, [
       {
-        args: ['show', '--remerge-diff', '--format=', '--no-color', 'abc1234'],
+        args: ['show', '--no-ext-diff', '--no-textconv', '--remerge-diff', '--format=', '--no-color', 'abc1234'],
         cwd: '/workspace',
       },
     ]);
