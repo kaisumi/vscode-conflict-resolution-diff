@@ -138,7 +138,7 @@ suite('Extension Test Suite', () => {
 
     assert.deepStrictEqual(calls.showInputBox, [
       {
-        prompt: 'Show resolved conflict diff for merge commit',
+        prompt: 'Paste a merge commit SHA',
         placeHolder: 'merge commit hash, e.g. abc1234',
       },
     ]);
