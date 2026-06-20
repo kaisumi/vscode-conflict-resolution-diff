@@ -86,7 +86,7 @@ export async function showUncommittedResolutionDiff<TDocument = unknown>(
   }
 
   try {
-    const stdout = await dependencies.runGit(['diff', 'AUTO_MERGE'], workspaceFolderPath);
+    const stdout = await dependencies.runGit(['diff', '--no-ext-diff', '--no-textconv', '--no-color', 'AUTO_MERGE'], workspaceFolderPath);
 
     await showDiffDocument(dependencies, stdout);
   } catch (error) {
@@ -104,18 +104,25 @@ export async function showResolvedConflictDiff<TDocument = unknown>(
     return;
   }
 
-  const commit = await dependencies.showInputBox({
+  const input = await dependencies.showInputBox({
     prompt: 'Paste a merge commit SHA',
     placeHolder: 'merge commit hash, e.g. abc1234',
   });
 
-  if (!commit) {
+  if (!input) {
+    return;
+  }
+
+  const commit = input?.trim();
+
+  if (!/^[0-9a-fA-F]{7,40}$/.test(commit)) {
+    dependencies.showErrorMessage('Enter a valid commit SHA.');
     return;
   }
 
   try {
     const stdout = await dependencies.runGit(
-      ['show', '--remerge-diff', '--format=', '--no-color', commit],
+      ['show', '--no-ext-diff', '--no-textconv', '--remerge-diff', '--format=', '--no-color', commit],
       workspaceFolderPath
     );
 
