@@ -105,7 +105,7 @@ export async function showResolvedConflictDiff<TDocument = unknown>(
   }
 
   const commit = await dependencies.showInputBox({
-    prompt: 'Show resolved conflict diff for merge commit',
+    prompt: 'Paste a merge commit SHA',
     placeHolder: 'merge commit hash, e.g. abc1234',
   });
 

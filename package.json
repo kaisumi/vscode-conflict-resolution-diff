@@ -58,7 +58,7 @@
     "viewsWelcome": [
       {
         "view": "conflict-resolution-diff.actions",
-        "contents": "Show conflict resolution diffs.\n\n[Show Uncommitted Resolution Diff](command:conflict-resolution-diff.showUncommittedResolutionDiff)\n[Show Resolved Conflict Diff](command:conflict-resolution-diff.showResolvedConflictDiff)"
+        "contents": "Show conflict resolution diffs.\n\n[Show Uncommitted Resolution Diff](command:conflict-resolution-diff.showUncommittedResolutionDiff)\n[Show Resolved Conflict Diff from Commit SHA](command:conflict-resolution-diff.showResolvedConflictDiff)"
       }
     ]
   },
