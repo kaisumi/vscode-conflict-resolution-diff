@@ -31,6 +31,12 @@
   "preview": true,
   "activationEvents": [],
   "main": "./out/extension.js",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false,
+      "description": "This extension runs Git commands in the current workspace to show conflict resolution diffs."
+    }
+  },
   "contributes": {
     "commands": [
       {
