@@ -14,22 +14,12 @@ It helps you review only the changes made while resolving merge conflicts, witho
 
 - Show changes made while resolving an ongoing merge conflict.
 
-  <video
-    src="https://raw.githubusercontent.com/kaisumi/vscode-conflict-resolution-diff/main/resources/demo-uncommitted.mp4"
-    controls
-    muted
-    width="800">
-  </video>
+  ![Show uncommitted conflict resolution diff](https://raw.githubusercontent.com/kaisumi/vscode-conflict-resolution-diff/main/resources/demo-uncommitted.gif)
 
 - Show the conflict resolution diff for an existing merge commit by pasting its commit SHA.
 
 
-  <video
-    src="https://raw.githubusercontent.com/kaisumi/vscode-conflict-resolution-diff/main/resources/demo-resolved-commit.mp4"
-    controls
-    muted
-    width="800">
-  </video>
+  ![Show resolved conflict diff](https://raw.githubusercontent.com/kaisumi/vscode-conflict-resolution-diff/main/resources/demo-committed.gif)
   
 - Open the result in Visual Studio Code as a diff-formatted document.
 - Run actions from the Conflict Diff view in the Activity Bar.
