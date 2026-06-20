@@ -3,7 +3,7 @@ import { execFile } from 'child_process';
 import { promisify } from 'util';
 
 const execFileAsync = promisify(execFile);
-const maxGitOutputBuffer = 10 * 1024 * 1024;
+const MAX_GIT_OUTPUT_BUFFER = 10 * 1024 * 1024;
 
 interface TextDocumentContent {
   content: string;
@@ -31,7 +31,7 @@ const defaultDependencies: ConflictResolutionDiffDependencies<vscode.TextDocumen
       args,
       {
         cwd,
-        maxBuffer: maxGitOutputBuffer,
+        maxBuffer: MAX_GIT_OUTPUT_BUFFER,
       }
     );
 
@@ -59,10 +59,10 @@ class ActionsTreeDataProvider implements vscode.TreeDataProvider<never> {
 
 async function showDiffDocument<TDocument>(
   dependencies: ConflictResolutionDiffDependencies<TDocument>,
-  stdout: string
+  diffText: string
 ) {
   const document = await dependencies.openTextDocument({
-    content: stdout || 'No diff found.',
+    content: diffText || 'No diff found.',
     language: 'diff',
   });
 
@@ -86,9 +86,9 @@ export async function showUncommittedResolutionDiff<TDocument = unknown>(
   }
 
   try {
-    const stdout = await dependencies.runGit(['diff', '--no-ext-diff', '--no-textconv', '--no-color', 'AUTO_MERGE'], workspaceFolderPath);
+    const diffText = await dependencies.runGit(['diff', '--no-ext-diff', '--no-textconv', '--no-color', 'AUTO_MERGE'], workspaceFolderPath);
 
-    await showDiffDocument(dependencies, stdout);
+    await showDiffDocument(dependencies, diffText);
   } catch (error) {
     dependencies.showErrorMessage(`Failed to run git diff AUTO_MERGE: ${getErrorMessage(error)}`);
   }
@@ -104,29 +104,29 @@ export async function showResolvedConflictDiff<TDocument = unknown>(
     return;
   }
 
-  const input = await dependencies.showInputBox({
+  const mergeCommitShaInput = await dependencies.showInputBox({
     prompt: 'Paste a merge commit SHA',
-    placeHolder: 'merge commit hash, e.g. abc1234',
+    placeHolder: 'merge commit SHA, e.g. abc1234',
   });
 
-  if (!input) {
+  if (!mergeCommitShaInput) {
     return;
   }
 
-  const commit = input?.trim();
+  const mergeCommitSha = mergeCommitShaInput.trim();
 
-  if (!/^[0-9a-fA-F]{7,40}$/.test(commit)) {
+  if (!/^[0-9a-fA-F]{7,40}$/.test(mergeCommitSha)) {
     dependencies.showErrorMessage('Enter a valid commit SHA.');
     return;
   }
 
   try {
-    const stdout = await dependencies.runGit(
-      ['show', '--no-ext-diff', '--no-textconv', '--remerge-diff', '--format=', '--no-color', commit],
+    const diffText = await dependencies.runGit(
+      ['show', '--no-ext-diff', '--no-textconv', '--remerge-diff', '--format=', '--no-color', mergeCommitSha],
       workspaceFolderPath
     );
 
-    await showDiffDocument(dependencies, stdout);
+    await showDiffDocument(dependencies, diffText);
   } catch (error) {
     dependencies.showErrorMessage(`Failed to run: ${getErrorMessage(error)}`);
   }
@@ -140,19 +140,18 @@ export function activate(context: vscode.ExtensionContext) {
     )
   );
 
-  const disposable = vscode.commands.registerCommand(
+  const showUncommittedResolutionDiffCommand = vscode.commands.registerCommand(
     'conflict-resolution-diff.showUncommittedResolutionDiff',
     () => showUncommittedResolutionDiff()
   );
 
-  context.subscriptions.push(disposable);
+  context.subscriptions.push(showUncommittedResolutionDiffCommand);
 
-
-  const disposable2 = vscode.commands.registerCommand(
+  const showResolvedConflictDiffCommand = vscode.commands.registerCommand(
     'conflict-resolution-diff.showResolvedConflictDiff',
     () => showResolvedConflictDiff()
   );
-  context.subscriptions.push(disposable2);
+  context.subscriptions.push(showResolvedConflictDiffCommand);
 }
 
 export function deactivate() {}
