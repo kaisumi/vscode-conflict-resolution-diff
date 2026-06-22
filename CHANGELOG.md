@@ -19,3 +19,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [1.0.2] - 2026-06-20
 
 - Fix screenshot videos on README.md.
+
+## [1.1.0] - 2026-06-22
+
+- Added Cursor compatibility by updating the VS Code engine requirement.
+

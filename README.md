@@ -109,13 +109,3 @@ Run tests:
 ```bash
 pnpm test
 ```
-
-## Release Notes
-
-### 0.0.1
-
-Initial release.
-
-- Show conflict resolution diff during an ongoing merge conflict.
-- Show remerge diff for a merge commit.
-- Provide actions from the Conflict Diff view in the Activity Bar.
